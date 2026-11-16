@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0b0e;
+  --surface: #131317;
+  --surface-elevated: #19191f;
+  --ink: #f5f3ee;
+  --ink-muted: #a19e96;
+  --border: rgba(245, 243, 238, 0.12);
+  --accent: #c8a253;
+  --accent-bright: #e6c878;
+  --accent-ink: #0b0b0e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 3px;
+  }
+}
+
+.font-display {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-mono-tabular {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--border);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--border);
+}
+
+/* Variable font weight shift on hover */
+.var-weight-link {
+  font-variation-settings: "wght" 500;
+  transition: font-variation-settings 220ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms ease;
+}
+
+.var-weight-link:hover {
+  font-variation-settings: "wght" 760;
+}
+
+.var-weight-heading {
+  font-variation-settings: "wght" 650;
+  transition: font-variation-settings 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.var-weight-heading:hover {
+  font-variation-settings: "wght" 800;
+}
+
+/* Luxury clip-path gold fill + rolling label + sliding arrow button */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
+}
+
+.btn-luxury:active {
+  transform: scale(0.97);
+}
+
+.btn-luxury .btn-fill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 340ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.btn-luxury:hover .btn-fill,
+.btn-luxury:focus-visible .btn-fill {
+  clip-path: inset(0 0 0 0);
+}
+
+.btn-luxury .btn-label-wrap {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-luxury .btn-label-primary,
+.btn-luxury .btn-label-clone {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease;
+}
+
+.btn-luxury .btn-label-clone {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  color: var(--accent-ink);
+}
+
+.btn-luxury:hover .btn-label-primary,
+.btn-luxury:focus-visible .btn-label-primary {
+  transform: translateY(-100%);
+}
+
+.btn-luxury:hover .btn-label-clone,
+.btn-luxury:focus-visible .btn-label-clone {
+  transform: translateY(-100%);
+}
+
+.btn-luxury .btn-arrow-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-luxury .btn-arrow-out,
+.btn-luxury .btn-arrow-in {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), color 220ms ease;
+}
+
+.btn-luxury .btn-arrow-in {
+  transform: translate(-120%, 120%);
+  color: var(--accent-ink);
+}
+
+.btn-luxury:hover .btn-arrow-out,
+.btn-luxury:focus-visible .btn-arrow-out {
+  transform: translate(120%, -120%);
+}
+
+.btn-luxury:hover .btn-arrow-in,
+.btn-luxury:focus-visible .btn-arrow-in {
+  transform: translate(0, 0);
+}
+
+/* Custom cursor active only on fine-pointer desktop without reduced motion */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn-luxury .btn-fill,
+  .btn-luxury .btn-label-primary,
+  .btn-luxury .btn-label-clone,
+  .btn-luxury .btn-arrow-out,
+  .btn-luxury .btn-arrow-in,
+  .var-weight-link,
+  .var-weight-heading {
+    transition: none;
+  }
+}
